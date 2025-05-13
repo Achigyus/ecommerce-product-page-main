@@ -16,7 +16,60 @@
 </head>
 <body>
   <header class="header">
+    <nav class="nav" aria-label="Primary">
+      <div class="nav_logo_wrap">
+        <button class="menu_btn" id="menu_btn" aria-label="Menu button" aria-expanded="false" aria-live="polite"
+          aria-controls="nav_links_ul">
+          <span class="sr_only">Menu</span>
+          <img src="/src/assets/images/icon-menu.svg" aria-hidden="true" alt="Open Menu icon" id="open"
+            class="menu_btn_img open">
+          <img src="/src/assets/images/icon-close.svg" aria-hidden="true" alt="Close Menu icon" id="close"
+            class="menu_btn_img close hidden">
+        </button>
 
+        <a href="/" class="nav_logo">
+          <img src="/src/assets/images/logo.svg" alt="News homepage logo" class="nav_logo_img">
+        </a>
+        
+        <ul class="nav_links_ul" id="nav_links_ul">
+          <li class="nav_links_li">
+            <a href="#" class="nav_link">Collections</a>
+          </li>
+          <li class="nav_links_li">
+            <a href="#" class="nav_link">Men</a>
+          </li>
+          <li class="nav_links_li">
+            <a href="#" class="nav_link">Women</a>
+          </li>
+          <li class="nav_links_li">
+            <a href="#" class="nav_link">About</a>
+          </li>
+          <li class="nav_links_li">
+            <a href="#" class="nav_link">Contact</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cart_profile">
+        <div class="cart_img_cont">
+          <img src="/src/assets/images/icon-cart.svg" alt="Shopping cart icon" class="cart_img">
+          <span class="cart_count"></span>
+        </div>
+        <div class="cart_cont">
+          <div class="cart_cont_top">
+            <p class="cart_cont_top_p">Cart</p>
+          </div>
+          <div class="cart_cont_btm">
+            <p class="cart_cont_btm_p">Your cart is empty</p>
+          </div>
+        </div>
+        <div class="profile_img_cont">
+          <img src="/src/assets/images/image-avatar.png" alt="Profile image" class="profile_img">
+        </div>
+      </div>
+
+      <div class="overlay" id="overlay"></div>
+    </nav>
   </header>
 
   <main class="main">
@@ -51,6 +104,6 @@
   Add to cart
   
   
-  <script type="module" src="/src/main.ts"></script>
+  <script type="module" src="/src/scripts/main.ts"></script>
 </body>
 </html>
