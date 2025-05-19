@@ -20,6 +20,72 @@ body
 .fw700
     font-weight: 700
 
+.nav
+    padding: 1.19rem 1.48rem 1.5rem 1.48rem
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.nav_logo_wrap
+    display: flex
+    align-items: center
+    gap: vars.$spacing_2
+
+.cart_profile
+    display: flex
+    align-items: center
+    gap: vars.$spacing_2
+    margin-left: auto
+
+.profile_img_cont
+    inline-size: 1.5rem
+    block-size: 1.5rem
+
+.profile_img
+    width: 100%
+    height: 100%
+    object-fit: cover
+    border-radius: 50%
+
+.sr_only
+    opacity: 0
+    position: absolute
+
+.cart_cont.hidden
+    display: none
+
+.menu_btn
+    position: relative
+    z-index: 2
+    background: transparent
+    border: none
+    cursor: pointer
+
+.open.hidden
+    display: none
+
+.close.hidden
+    display: none
+
+.nav_links_ul
+    list-style: none
+    padding: 0
+    margin: 0
+    position: fixed
+    display: flex
+    flex-direction: column
+    top: 0
+    left: -100%
+    background: vars.$white
+    gap: vars.$spacing_2
+    width: 60%
+    min-height: 100vh
+    padding: vars.$spacing_4
+    transition: all 0.3s ease-in-out
+
+.nav_links_ul.active
+    left: 0
+
 @include bp.breakpoint(48rem)
     
 

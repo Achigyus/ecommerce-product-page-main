@@ -55,7 +55,7 @@
           <img src="/src/assets/images/icon-cart.svg" alt="Shopping cart icon" class="cart_img">
           <span class="cart_count"></span>
         </div>
-        <div class="cart_cont">
+        <div class="cart_cont hidden" id="cart_cont">
           <div class="cart_cont_top">
             <p class="cart_cont_top_p">Cart</p>
           </div>
@@ -79,12 +79,12 @@
         <div class="main_top_hero_img_cont">
           <img src="/src/assets/images/image-product-1.jpg" alt="" class="main_top_hero_img">
         </div>
-        <div class="scroll_lt_img_cont">
-          <img src="/src/assets/images/icon-previous.svg" alt="Left Arrow" class="scroll_lt_img">
-        </div>
-        <div class="scroll_rt_img_cont">
-          <img src="/src/assets/images/icon-next.svg" alt="Left Arrow" class="scroll_rt_img">
-        </div>
+        <button class="scroll_btn left">
+          <img src="/src/assets/images/icon-previous.svg" alt="Left Arrow" class="scroll_btn_img">
+        </button>
+        <button class="scroll_btn right">
+          <img src="/src/assets/images/icon-next.svg" alt="Left Arrow" class="scroll_btn_img right">
+        </button>
       </div>
 
       <div class="main_btm">
@@ -102,7 +102,7 @@
           <p class="old_price">$250.00</p>
         </div>
         <form action="" class="input_button">
-          <input type="number" name="amount_to_add" id="amount_to_add" min="0" class="amount_to_add">
+          <input type="number" name="amount_to_add" id="amount_to_add" value="0" min="0" class="amount_to_add">
           <button type="button" class="add_to_cart_btn">
             <img src="/src/assets/images/icon-cart.svg" alt="Shopping cart icon" class="add_to_cart_img">
             <span class="add_to_cart_span">Add to cart</span>
