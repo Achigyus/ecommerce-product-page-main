@@ -11,6 +11,8 @@ let closeMenuIcon = menuBtn.querySelector('.close') as HTMLImageElement
 let carouselBtns = document.querySelectorAll('.scroll_btn') as NodeListOf<HTMLButtonElement>
 let navRight = document.querySelector('.scroll_btn_img.right') as HTMLImageElement
 let imageArray = [img1, img2, img3, img4]
+let form = document.querySelector('form') as HTMLFormElement
+let amountToAdd = form.querySelector('#amount_to_add') as HTMLInputElement
 
 console.log(navRight)
 
@@ -36,8 +38,47 @@ function scrollImage(e: Event) {
   currentImage.src = imageArray[newIndex]
 }
 
+function priceUpdate() {
+  let pricePerItem = 250.0
+  let discount = 0.5
+  let totalItems = parseInt(amountToAdd.value)
+  if (totalItems === 0) {
+    totalItems = 1
+    enableSubmit(false)
+  } else {
+    enableSubmit(true)
+  }
+  let totalPrice = pricePerItem * totalItems
+  let discountedPrice = totalPrice * discount
+  let discountedPriceElement = document.querySelector('.new_price') as HTMLParagraphElement
+  let totalPriceElement = document.querySelector('.old_price') as HTMLParagraphElement
+  discountedPriceElement.innerText = `$${discountedPrice.toFixed(2)}`
+  totalPriceElement.innerText = `$${totalPrice.toFixed(2)}`
+}
+
+function enableSubmit(state: boolean) {
+  let submitBtn = form.querySelector('.add_to_cart_btn') as HTMLButtonElement
+  if (state) {
+    submitBtn.removeAttribute('disabled')
+  } else {
+    submitBtn.setAttribute('disabled', 'true')
+  }
+}
+
+function submitForm(e: Event) {
+  e.preventDefault()
+  let formData = new FormData(form)
+  let data = Object.fromEntries(formData.entries())
+  console.log(data)
+}
+
+// Add event listeners
+
 menuBtn.addEventListener('click', toggleMenu)
 
 carouselBtns.forEach((btn) => {
   btn.addEventListener('click', scrollImage)
 })
+
+amountToAdd.addEventListener('input', priceUpdate)
+form.addEventListener('submit', submitForm)
