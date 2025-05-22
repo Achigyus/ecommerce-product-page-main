@@ -14,8 +14,6 @@ let imageArray = [img1, img2, img3, img4]
 let form = document.querySelector('form') as HTMLFormElement
 let amountToAdd = form.querySelector('#amount_to_add') as HTMLInputElement
 
-console.log(navRight)
-
 function toggleMenu() {
   menuUl.classList.toggle('active')
   openMenuIcon.classList.toggle('hidden')
@@ -70,6 +68,34 @@ function submitForm(e: Event) {
   let formData = new FormData(form)
   let data = Object.fromEntries(formData.entries())
   console.log(data)
+  addToCart()
+  form.reset()
+  enableSubmit(false)
+}
+
+function addToCart() {
+  let cartCount = document.querySelector('span.cart_count') as HTMLSpanElement
+  console.log(cartCount)
+  cartCount.textContent = amountToAdd.value
+  let cartBtm = document.querySelector('.cart_cont_btm') as HTMLDivElement
+  cartBtm.innerHTML = `
+    <div class="cart_item_img_details"> 
+      <div class="cart_item_img_cont">
+        <img src="${imageArray[0]}" alt="product image" class="cart_item_img">
+       </div>
+       <div class="cart_item_details">
+          <p class="cart_item_name">Fall Limited Edition Sneakers</p>
+          <p class="cart_item_price">
+            <span class="cart_item_new_price">$${(250 * 0.5).toFixed(2)} x ${amountToAdd.value}</span>
+            <span class="cart_item_total_price">$${(125 * parseInt(amountToAdd.value)).toFixed(2)}</span>
+          </p>
+        </div>
+        <button class="delete_cart_item_btn">
+          <img src="/src/assets/images/icon-delete.svg" alt="delete cart item" class="delete_cart_item_img">
+        </button>
+    </div> 
+    <button class="checkout_btn">Checkout</button>
+  `
 }
 
 // Add event listeners
