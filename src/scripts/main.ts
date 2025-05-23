@@ -1,25 +1,39 @@
 import '../sass/index.sass'
+// IMG imports
 import img1 from '../assets/images/image-product-1.jpg'
 import img2 from '../assets/images/image-product-2.jpg'
 import img3 from '../assets/images/image-product-3.jpg'
 import img4 from '../assets/images/image-product-4.jpg'
 
+// DOM elements
 let menuBtn = document.getElementById('menu_btn') as HTMLButtonElement
 let menuUl = document.getElementById('nav_links_ul') as HTMLUListElement
 let openMenuIcon = menuBtn.querySelector('.open') as HTMLImageElement
 let closeMenuIcon = menuBtn.querySelector('.close') as HTMLImageElement
 let carouselBtns = document.querySelectorAll('.scroll_btn') as NodeListOf<HTMLButtonElement>
-let navRight = document.querySelector('.scroll_btn_img.right') as HTMLImageElement
-let imageArray = [img1, img2, img3, img4]
 let form = document.querySelector('form') as HTMLFormElement
 let amountToAdd = form.querySelector('#amount_to_add') as HTMLInputElement
+let cartBtn = document.querySelector('.cart_img_cont') as HTMLButtonElement
+let cartCont = document.querySelector('#cart_cont') as HTMLDivElement
 
+// Variables
+let imageArray = [img1, img2, img3, img4]
+
+// Function definitions
+
+// Toggle menu function: This function toggles the menu open and close
 function toggleMenu() {
   menuUl.classList.toggle('active')
   openMenuIcon.classList.toggle('hidden')
   closeMenuIcon.classList.toggle('hidden')
 }
 
+// Toggle cart function: This function toggles the cart open and close
+function toggleCart() {
+  cartCont.classList.toggle('hidden')
+}
+
+// Scroll image function: This function scrolls the images in the carousel
 function scrollImage(e: Event) {
   let target = e.target as HTMLButtonElement
   let currentImage = document.querySelector('.main_top_hero_img') as HTMLImageElement
@@ -36,6 +50,7 @@ function scrollImage(e: Event) {
   currentImage.src = imageArray[newIndex]
 }
 
+// Update price function: This function updates the price based on the amount to add and enables or disables the submit button
 function priceUpdate() {
   let pricePerItem = 250.0
   let discount = 0.5
@@ -54,6 +69,7 @@ function priceUpdate() {
   totalPriceElement.innerText = `$${totalPrice.toFixed(2)}`
 }
 
+// Enable or disable the submit button based on the state
 function enableSubmit(state: boolean) {
   let submitBtn = form.querySelector('.add_to_cart_btn') as HTMLButtonElement
   if (state) {
@@ -63,6 +79,7 @@ function enableSubmit(state: boolean) {
   }
 }
 
+// Submit form function: This function handles the form submission
 function submitForm(e: Event) {
   e.preventDefault()
   let formData = new FormData(form)
@@ -70,14 +87,16 @@ function submitForm(e: Event) {
   console.log(data)
   addToCart()
   form.reset()
+  priceUpdate()
   enableSubmit(false)
 }
 
+// Add to cart function: This function adds the item to the cart and updates the cart count
 function addToCart() {
   let cartCount = document.querySelector('span.cart_count') as HTMLSpanElement
   console.log(cartCount)
   cartCount.textContent = amountToAdd.value
-  let cartBtm = document.querySelector('.cart_cont_btm') as HTMLDivElement
+  let cartBtm = cartCont.querySelector('.cart_cont_btm') as HTMLDivElement
   cartBtm.innerHTML = `
     <div class="cart_item_img_details"> 
       <div class="cart_item_img_cont">
@@ -96,15 +115,30 @@ function addToCart() {
     </div> 
     <button class="checkout_btn">Checkout</button>
   `
+  function clearCart() {
+    cartBtm.innerHTML = `
+      <p class="cart_cont_btm_p">Your cart is empty</p>
+    `
+    cartCount.textContent = ''
+  }
+  let deleteBtn = cartBtm.querySelector('.delete_cart_item_btn') as HTMLButtonElement
+  let checkout_btn = cartBtm.querySelector('.checkout_btn') as HTMLButtonElement
+  
+  checkout_btn.addEventListener('click', () => {
+    clearCart()
+    alert('Checkout completed 🥳! Thank you for your purchase 😊!')
+    toggleCart()
+  })
+  deleteBtn.addEventListener('click', clearCart)
 }
 
-// Add event listeners
-
+// Event listeners
 menuBtn.addEventListener('click', toggleMenu)
 
-carouselBtns.forEach((btn) => {
-  btn.addEventListener('click', scrollImage)
-})
+cartBtn.addEventListener('click', toggleCart)
+
+carouselBtns.forEach((btn) => { btn.addEventListener('click', scrollImage) })
 
 amountToAdd.addEventListener('input', priceUpdate)
+
 form.addEventListener('submit', submitForm)
