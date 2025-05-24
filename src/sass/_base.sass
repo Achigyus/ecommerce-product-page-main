@@ -95,8 +95,22 @@ body
 .old_price
     text-decoration: line-through
 
+.main_top_thumbnails
+    display: none
+
 @include bp.breakpoint(48rem)
     
 
 @include bp.breakpoint(80rem)
-    
+    .scroll_btn
+        display: none
+
+    .main_top_thumbnails
+        display: flex
+
+    .main_top_thumbnails_ul, .main_top_overlay_thumbnails_ul
+        list-style: none
+        padding: 0
+        margin: 0
+        display: flex
+        gap: vars.$spacing_2

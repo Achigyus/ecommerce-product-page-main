@@ -11,6 +11,7 @@ let menuUl = document.getElementById('nav_links_ul') as HTMLUListElement
 let openMenuIcon = menuBtn.querySelector('.open') as HTMLImageElement
 let closeMenuIcon = menuBtn.querySelector('.close') as HTMLImageElement
 let carouselBtns = document.querySelectorAll('.scroll_btn') as NodeListOf<HTMLButtonElement>
+let thumbnailBtns = document.querySelectorAll('.main_top_thumbnails_btn') as NodeListOf<HTMLButtonElement>
 let form = document.querySelector('form') as HTMLFormElement
 let amountToAdd = form.querySelector('#amount_to_add') as HTMLInputElement
 let cartBtn = document.querySelector('.cart_img_cont') as HTMLButtonElement
@@ -138,6 +139,17 @@ menuBtn.addEventListener('click', toggleMenu)
 cartBtn.addEventListener('click', toggleCart)
 
 carouselBtns.forEach((btn) => { btn.addEventListener('click', scrollImage) })
+
+thumbnailBtns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    let target = e.target as HTMLButtonElement
+    console.log(target)
+    let currentImage = document.querySelector('.main_top_hero_img') as HTMLImageElement
+    let imageIndex = parseInt(target.id.split('_')[1]) - 1
+    console.log(target.id.split('_')[1])
+    currentImage.src = imageArray[imageIndex]
+  })
+})
 
 amountToAdd.addEventListener('input', priceUpdate)
 
